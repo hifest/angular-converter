@@ -1,0 +1,8 @@
+<div class="py-10  text-center border-b-2 ">
+    <div *ngFor="let item of currency">
+    <div *ngIf="item && (item.r030 === 840 || item.r030 === 978)">   <!--через це є багато "мертвих" div в консолі але вони не повинні впливати на продуктивність-->
+          {{ item.cc }} :
+          {{ item.rate | number:'1.2-2'  }}
+    </div>
+  </div>
+</div>
