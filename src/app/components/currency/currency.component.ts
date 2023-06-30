@@ -14,37 +14,25 @@ export class CurrencyComponent {
   currency1Value: number = 0;
   currency2Value: number = 0;
 
-
   FirstInputChange(){
     if(this.currency1 === this.currency2){
       this.currency1Value = this.currency2Value
-    }else if(this.currency1 === 'USD' || this.currency1 === 'EUR'){
-      const currencyValue = this.currency.find(obj => obj.cc === this.currency1)
-      currencyValue ? this.currency2Value = parseFloat((this.currency1Value * currencyValue.rate).toFixed(2)) : console.log('none');
-    }
-    else if(this.currency1 === 'UAH') {
-      const currencyValue = this.currency.find(obj => obj.cc === this.currency2)
-      currencyValue ? this.currency2Value = parseFloat((this.currency1Value / currencyValue.rate).toFixed(2)) : console.log('none');
-    }
-    else if(this.currency2 === 'UAH') {
-      const currencyValue = this.currency.find(obj => obj.cc === this.currency1)
-      currencyValue ? this.currency1Value = parseFloat((this.currency2Value / currencyValue.rate).toFixed(2)) : console.log('none');
+    }else{
+      let value;
+      this.currency2 != "UAH"  ? value = this.currency.find(obj => obj.cc === this.currency2) : value = this.currency.find(obj => obj.cc === this.currency1)
+      //@ts-ignore
+      this.currency1 != "UAH" ? this.currency2Value = this.currency1Value * value?.rate : this.currency2Value =  this.currency1Value / value?.rate
     }
   }
-  SecondInputChange(){
-    if(this.currency1 === this.currency2){
+  SecondInputChange() {
+    if (this.currency1 === this.currency2) {
       this.currency1Value = this.currency2Value
-    }else if(this.currency2 === 'USD' || this.currency2 === 'EUR'){
-      const currencyValue = this.currency.find(obj => obj.cc === this.currency2)
-      currencyValue ? this.currency1Value = parseFloat((this.currency2Value * currencyValue.rate).toFixed(2)) : console.log('none');
     }
-    else if(this.currency1 === 'UAH') {
-      const currencyValue = this.currency.find(obj => obj.cc === this.currency2)
-      currencyValue ? this.currency2Value = parseFloat((this.currency1Value / currencyValue.rate).toFixed(2)) : console.log('none');
-    }
-    else if(this.currency2 === 'UAH') {
-      const currencyValue = this.currency.find(obj => obj.cc === this.currency1)
-      currencyValue ? this.currency1Value = parseFloat((this.currency2Value / currencyValue.rate).toFixed(2)) : console.log('none');
+    else{
+      let value;
+      this.currency1 != "UAH"  ? value = this.currency.find(obj => obj.cc === this.currency1) : value = this.currency.find(obj => obj.cc === this.currency2)
+      //@ts-ignore
+      this.currency2 != "UAH" ? this.currency1Value = this.currency2Value * value?.rate : this.currency1Value = this.currency1Value / value?.rate
     }
   }
 }
